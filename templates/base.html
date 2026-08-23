@@ -3,6 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% bottle title %} Neapolina Pizzaria Pizza de Nappoli {endblock %} </title>
+    <title>{% bottle title %} Neapolina Pizzaria Pizza de Nappoli{endblock %} </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+<body>
+   <nav class="nav">
+    <div class="nav-inner">
+        <a href="{{url_for('index')}}" class="brand" aria-label="Neapolina Pizzaria home">
+            <span>NEAPOILNA<br>PIZZARIA</span>
+        </a>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('index') }}#me">About</a></li>
+      <li><a href="{{ url_for('menu') }}" class="{{ 'is-active' if active == 'menu' }}">Menu</a></li>
+      <li><a href="{{ url_for('order_history') }}" class="{{ 'is-active' if active == 'orders' }}"> </a></li>
+      <li><a href="{{ url_for('cart_view') }}" class="nav-cart-link {{ 'is-active' if active == 'cart' }}"> 
+      {% if session.get('cart') %} {% endif %}
+    </ul>
+    </nav> 
+
+    
+    
+
+
+
+            
