@@ -17,7 +17,7 @@
       <li><a href="{{ url_for('menu') }}" class="{{ 'is-active' if active == 'menu' }}">Menu</a></li>
       <li><a href="{{ url_for('order_history') }}" class="{{ 'is-active' if active == 'orders' }}"> </a></li>
       <li><a href="{{ url_for('cart_view') }}" class="nav-cart-link {{ 'is-active' if active == 'cart' }}"> 
-      {% if session.get('cart') %} {% endif %}
+      {% if session.get('cart') %} <span class="nav-cart-count">{{ session['cart']|length }}</span>{% endif %}
     </ul>
     </nav> 
 
