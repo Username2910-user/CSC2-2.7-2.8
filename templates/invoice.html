@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{block content}
+
+ <h2>Invoice</h2>
+    <h3>Invoice_Number:</h3> {{ invoice_number }}
+    <h3>Date: </h3> {{invoice_date}}
+    <h3>Customer Name:</h3> {{ customer_name }}
+    <h2>Items</h2>
+    <ul>
+        {% for item, details in cart.items() %}
+        <li> {{ item }}: {{ details['quantity'] }} x ${{ details['price'] }} = ${{ details['quantity'] * details['price'] }}</li>
+        {% endfor %}
+    </ul>
