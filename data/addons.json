@@ -1,0 +1,39 @@
+{
+    "Pepparoni": {
+        "price": 3.20
+    },
+
+    "Truffle Crumbs": {
+        "price": 3.20
+    },
+    
+    "Sausage": {
+        "price": 3.20
+    },
+    
+    "Extra Mozarella": {
+        "price": 4.00
+    },
+    
+    "Onions": {
+        "price": 2.90
+    },
+    
+    "Bacon": {
+        "price": 3.20
+    },
+    
+    "Olives": {
+        "price": 2.90
+    },
+    
+    "Pineapple": {
+        "price": 2.90
+    }
+    
+    
+    
+    
+    
+    
+}
