@@ -3,13 +3,11 @@ import datetime
 import sqlite3
 
 
-
-
 app = Flask(____name____)
 app.secret_key = "pizzaria_pizza"
 
 def initialise_database():
-  with sqlite3.connect('flower_shop.db') as conn:
+  with sqlite3.connect('pizzaria.db') as conn:
     cursor = conn.cursor()
     cursor.execute(''' 
       CREATE TABLE IF NOT EXISTS orders ( 
