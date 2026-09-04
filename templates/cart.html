@@ -7,3 +7,13 @@
 {% if not cart_items %}
     <p>Cart is Empty. <a href="{{url_for('index')}}">Go add something in your Cart.</a></p>
     
+<body>
+    <form action="{{url_for('add_to_cart')}}" method="post">
+        <fieldset>
+            <legend for="pizza">Select Pizza</legend>
+            <select name= "pizza" id="pizza"> 
+              {% for flower, details in flowers.items() %}
+              <option value="{{ flower }}">{{ flower }} - ${{ details['price'] }}</option>
+              {% endfor %}
+            </select>
+     <>       
