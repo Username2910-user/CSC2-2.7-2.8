@@ -69,7 +69,7 @@ def load_data():
         flash("Unable to load pizza data.")
         return {}, {}
     
-# Function for the add to cart function
+# Function 2 for the add to cart function
 
 def add_to_cart():
     pizza = request.form.get("pizza")
@@ -81,6 +81,8 @@ def add_to_cart():
         flash("Selected pizza is invalid.")
         return redirect(url_for("menu"))
     
+    available_dough = pizzas[pizza]['dough']
+    current_quantity = cart[pizza]['quantity', 0] if pizzas in cart else 0
     
 
 
