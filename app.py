@@ -43,7 +43,18 @@ def menu():
                            selected_addons=selected_addons, pizza_subtotal=pizza_subtotal,
                            addon_subtotal=addon_subtotal, discount=discount, discount_applied=discount_applied,)
         
+def calculate_total(cart, selected_addons):
+    pizza_subtotal = sum(item["price"] * item["quantity"] for item in cart.values())
+    addon_subtotal = sum(selected_addons.values())
 
+    discount = 0
+    discount_applied = False
+    if pizza_subtotal >= 60:
+        discount = pizza_subtotal * 0.10
+        discount_applied = True
+
+    total = addon_subtotal + pizza_subtotal - discount
+    return total, pizza_subtotal, addon_subtotal, discount, discount_applied
 
 
 
