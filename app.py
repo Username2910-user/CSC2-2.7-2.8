@@ -70,7 +70,7 @@ def load_data():
         return {}, {}
     
 # Function 2 for the add to cart function
-
+@app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
     pizza = request.form.get("pizza")
     quantity = int(request.form.get("quantity"))
@@ -100,7 +100,21 @@ def add_to_cart():
     session["cart"] = cart
     session.modified = True
     flash(f"{quantity} {pizza}(s) added to cart.")
-    return redirect(url_for("menu"))    
+    return redirect(url_for("menu"))
+
+# Function 3 for the remove from cart function
+
+@app.route("/remove_from_cart/<item>")  
+def remove_from_cart(item):
+    cart = session.get("cart", {})
+    if item in cart:
+        del cart[item]
+        session["cart"] = cart
+        session.modified = True
+        flash(f"Removed {item} from the cart.")
+    else:
+        flash("Item not found in cart.")
+    return redirect(url_for("menu"))
     
 
 
