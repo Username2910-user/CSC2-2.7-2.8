@@ -29,4 +29,28 @@
   </fieldset>
 </form>
 
+<h2>Your Cart</h2>
+<form method="post">
+
+  {% if cart %}
+  <ul>
+    {% for item, details in cart.items() %}
+    <li>
+      {{ item }}: {{ details['quantity'] }} x ${{ details['price'] }}
+      = ${{ '%.2f'|format(details['quantity'] * details['price']) }}
+      <a href="{{ url_for('remove_from_cart', item=item) }}">[Remove]</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Your cart is empty.</p>
+  {% endif %}
+
+  {% if selected_addons %}
+  <ul>
+    {% for item, price in selected_addons.items() %}
+    <li>{{ item }} - ${{ '%.2f'|format(price) }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
         
