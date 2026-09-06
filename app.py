@@ -223,7 +223,7 @@ def checkout():
         selected_addons=selected_addons, discount=discount, discount_applied=discount_applied,
     )
 
-# Feature 7 order or order history function
+# Function 7: Order or Order History function
 
 app.route("/orders")
 def orders_history():
@@ -246,7 +246,15 @@ def orders_history():
 
     return render_template("order_history.html", orders=orders)
 
+# Function 8: Cancel Saved Order function
 
+@app.route('/cancel_saved_order/<int:order_id>', methods=['POST'])
+def cancel_saved_order(order_id):
+    with sqlite3.connect('pizzaria.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM orders WHERE order_id = ?",(order_id,))
+        flash(f"Order #{order_id} cancelled.")
+    return redirect(url_for('order_history'))
 
 if __name__ == '__main__': 
       initialise_database()
