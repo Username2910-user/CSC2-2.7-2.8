@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{%block title%}Menu - Neapolina Pizzaria{% endblock %}
+{% block content%}
+
+<h1>Menu</h1>
+
+<form action="{{ url_for('add_to_cart')}}" method="post">
+    <fieldset>
+        <legend>Select Your Preferred Pizza</legend>
+        <select name="pizza" id="pizza">
+        {% for pizza, details in pizzas.items() %}
+        <option value="{{ pizza }}">{{ pizza }} - ${{ details['price'] }} (Stock: {{ details['stock'] }})</option>
+        {% endfor %}
+    </select>
+        
