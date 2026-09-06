@@ -156,6 +156,13 @@ def checkout():
     if not cart:
         flash("Your cart is empty.")
         return redirect(url_for("menu"))
+    
+    # Calculate totals and generate invoice number
+
+    total, pizza_subtotal, addon_subtotal, discount, discount_applied = calculate_total(cart, selected_addons)
+    invoice_date = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+    invoice_number = f"INV_{customer_name.replace(' ', '_')}_{invoice_date}"
+
 
 
 if __name__ == '__main__': 
