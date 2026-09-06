@@ -171,7 +171,23 @@ def checkout():
       VALUES (?, ?, ?, ?, ?)
     ''', (invoice_number, customer_name, json.dumps(cart),  json.dumps(selected_addons), total))
     conn.commit()
-    
+
+    with open('data/pizza.json', "r") as file:
+        pizza_data = json.load(file)
+
+    for pizza_name, details in cart.items():
+        if pizza_name in pizza_data:
+            pizza_data[pizza_name]["dough"] -= details["quantity"]
+            if pizza_data[pizza_name]["dough"] < 0:
+                pizza_data[pizza_name]["dough"] = 0
+
+    try:
+        with open('data/pizza.json', "w") as file:
+            json.dump(pizza_data, file, indent=4)
+
+    except OSError as e:
+        print(f"Stock update error: {e}")
+        flash("Could not update dough file.")
 
 if __name__ == '__main__': 
       initialise_database()
