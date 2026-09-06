@@ -33,6 +33,8 @@ def index():
 def about():
     return render_template("about_us.html")
 
+# Function for Menu page
+
 @app.route("/menu")
 def menu():
     pizzas, addons = load_data()
@@ -66,8 +68,14 @@ def load_data():
         print(f"Error loading data: {e}")
         flash("Unable to load pizza data.")
         return {}, {}
+    
+# Function for the add to cart function
 
-
+def add_to_cart():
+        pizza = request.form.get("pizza")
+        quantity = int(request.form.get("quantity"))
+        pizzas, addons = load_data()
+        cart = session.get("cart", {})
 
 if __name__ == '__main__': 
       initialise_database()
