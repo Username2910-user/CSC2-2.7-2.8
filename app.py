@@ -141,6 +141,22 @@ def cancel_order():
     flash("Order is canceled.")
     return redirect(url_for("menu")) 
 
+# Function 6 for the checkout function
+
+@app.route("/checkout", methods=["POST"])
+def checkout():
+    customer_name = request.form["customer_name"].strip().title()
+    if not customer_name:
+        flash("Customer name is required.")
+        return redirect(url_for("menu"))
+
+    cart = session.get("cart", {})
+    selected_addons = session.get("selected_addons", {})
+
+    if not cart:
+        flash("Your cart is empty.")
+        return redirect(url_for("menu"))
+
 
 if __name__ == '__main__': 
       initialise_database()
