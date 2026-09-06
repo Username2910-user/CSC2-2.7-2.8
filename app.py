@@ -254,6 +254,7 @@ def cancel_saved_order(order_id):
         cursor = conn.cursor()
         cursor.execute("DELETE FROM orders WHERE order_id = ?",(order_id,))
         flash(f"Order #{order_id} cancelled.")
+        conn.commit()
     return redirect(url_for('order_history'))
 
 if __name__ == '__main__': 
