@@ -31,8 +31,7 @@
 
 <h2>Your Cart</h2>
 <form method="post">
-
-  {% if cart %}
+{% if cart %}
   <ul>
     {% for item, details in cart.items() %}
     <li>
@@ -53,4 +52,11 @@
     {% endfor %}
   </ul>
   {% endif %}
+
+  <p>Pizza Subtotal: ${{ '%.2f'|format(pizza_subtotal) }}</p>
+  <p>Add-on Subtotal: ${{ '%.2f'|format(addon_subtotal) }}</p>
+  {% if discount_applied %}
+  <p>Discount (25%): -${{ '%.2f'|format(discount) }}</p>
+  {% endif %}
+  <h3>Total: ${{ '%.2f'|format(total) }}</h3>
         
