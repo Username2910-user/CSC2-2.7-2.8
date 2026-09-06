@@ -115,7 +115,23 @@ def remove_from_cart(item):
     else:
         flash("Item not found in cart.")
     return redirect(url_for("menu"))
-    
+
+# Function 4 for the selected addon function 
+
+@app.route("/select_addon", methods=["POST"])
+def select_addon():
+    pizzas, addons = load_data()
+    selected_keys = request.form.getlist("addons")
+    selected_addons = {}
+
+    for addon in selected_keys:
+        if addon in addons:
+            selected_addons[addon] = float(addons[addon]["price"])
+
+    session["selected_addons"] = selected_addons
+    session.modified = True
+    flash(f"{len(selected_addons)} add-on(s) selected.")
+    return redirect(url_for("menu"))     
 
 
 if __name__ == '__main__': 
