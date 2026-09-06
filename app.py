@@ -131,7 +131,15 @@ def select_addon():
     session["selected_addons"] = selected_addons
     session.modified = True
     flash(f"{len(selected_addons)} add-on(s) selected.")
-    return redirect(url_for("menu"))     
+    return redirect(url_for("menu"))    
+
+# Function 5  cancel order function
+@app.route("/cancel_order", methods=["POST"])
+def cancel_order():
+    session.pop("cart", None)
+    session.pop("selected_addons", None)
+    flash("Order is canceled.")
+    return redirect(url_for("menu")) 
 
 
 if __name__ == '__main__': 
