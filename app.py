@@ -25,26 +25,29 @@ def initialise_database():
     ''')
     conn.commit()
 
-def save_order(customer_name, product_name, quantity, total_price):
-    """INSERT one row into the orders table. Called when checkout happens."""
-    connection = sqlite3.connect('pizzaria.db')
-    connection.execute(
-        "INSERT INTO orders (customer_name, product_name, quantity, total_price) VALUES (?, ?, ?, ?)",
-        (customer_name, product_name, quantity, total_price),
-    )
-    connection.commit()
-
-@app.route('/about')
-def about():
-  return render_template('menu.html')
-
-
-# Function for index 
-@app.route('/')
+@app.route("/")
 def index():
+    return render_template("index.html")
+
+@app.route("/about")
+def about():
+    return render_template("about_us.html")
+
+@app.route("/menu")
+def menu():
+    pizzas, addons = load_data()
+    cart = session.get("cart", {})
+    selected_addons = session.get("selected_addons", {})
+    total, pizza_subtotal, addon_subtotal, discount, discount_applied = calculate_total(cart, selected_addons)
+    return render_template("menu.html",pizzas=pizzas, addons=addons, cart=cart, total=total,
+                           selected_addons=selected_addons, pizza_subtotal=pizza_subtotal,
+                           addon_subtotal=addon_subtotal, discount=discount, discount_applied=discount_applied,)
+        
+
+
+
 
 
 if __name__ == '__main__': 
-      
-    initialise_database()
-    app.run(debug=True)
+      initialise_database()
+      app.run(debug=True)
