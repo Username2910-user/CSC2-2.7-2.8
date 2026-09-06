@@ -223,6 +223,31 @@ def checkout():
         selected_addons=selected_addons, discount=discount, discount_applied=discount_applied,
     )
 
+# Feature 7 order or order history function
+
+app.route("/orders")
+def orders_history():
+    with sqlite3.connect('pizzaria.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM orders ORDER BY date DESC")
+        rows = cursor.fetchall()
+
+    orders = []
+    for row in rows:
+        orders.append({
+            "order_id": row[0],
+            "invoice_number": row[1],
+            "customer_name": row[2],
+            "items": json.loads(row[3]),
+            "addons": json.loads(row[4]),
+            "total": row[5],
+            "date": row[6],
+        })
+
+    return render_template("order_history.html", orders=orders)
+
+
+
 if __name__ == '__main__': 
       initialise_database()
       app.run(debug=True)
