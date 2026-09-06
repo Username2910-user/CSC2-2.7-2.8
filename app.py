@@ -83,6 +83,14 @@ def add_to_cart():
     
     available_dough = pizzas[pizza]['dough']
     current_quantity = cart[pizza]['quantity', 0] if pizzas in cart else 0
+
+    if available_dough <= 0:
+        flash(f"Sorry, {pizza} is out of dough.")
+        return redirect(url_for("menu"))
+
+    if current_quantity + quantity > available_dough:
+        flash(f"Sorry, you can only order {available_dough - current_quantity} more of {pizza}.")
+        return redirect(url_for("menu"))
     
 
 
