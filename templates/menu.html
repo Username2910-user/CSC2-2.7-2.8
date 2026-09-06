@@ -17,4 +17,16 @@
     <button type="submit">Add to Cart</button>
   </fieldset>
 </form>
+
+<form action="{{ url_for('select_addon') }}" method="post">
+  <fieldset>
+    <legend>Add-ons</legend>
+    {% for addon, data in addons.items() %}
+    <input type="checkbox" name="addons" id="{{ addon }}" value="{{ addon }}" {% if addon in selected_addons %}checked{% endif %}>
+    <label for="{{ addon }}">{{ addon }} (${{ data.price }})</label><br>
+    {% endfor %}
+    <button type="submit">Update Add-ons</button>
+  </fieldset>
+</form>
+
         
