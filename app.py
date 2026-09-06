@@ -55,7 +55,17 @@ def calculate_total(cart, selected_addons):
 
     total = addon_subtotal + pizza_subtotal - discount
     return total, pizza_subtotal, addon_subtotal, discount, discount_applied
-
+def load_data():
+    try:
+        with open('pizza.json') as file:
+            pizzas = json.load(file)
+        with open('addons.json') as file:
+            addons = json.load(file)
+        return pizzas, addons
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Error loading data: {e}")
+        flash("Unable to load pizza data.")
+        return {}, {}
 
 
 
