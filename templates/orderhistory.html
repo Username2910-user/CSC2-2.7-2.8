@@ -1,1 +1,19 @@
-    1324
+{% extends "base.html" %}
+{% block title %}Order History - Neapolina Pizzaria {% endblock %}
+{% block content %}
+
+<h1>Order History</h1>
+
+{% if orders %}
+<table>
+  <thead>
+    <tr>
+      <th>Invoice Number</th>
+      <th>Customer Name</th>
+      <th>Items</th>
+      <th>Add-Ons</th>
+      <th>Total ($)</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
