@@ -186,8 +186,42 @@ def checkout():
             json.dump(pizza_data, file, indent=4)
 
     except OSError as e:
-        print(f"Stock update error: {e}")
+        print(f"Dough update error: {e}")
         flash("Could not update dough file.")
+
+    # Invoice file 
+
+    invoice_filename = f"{invoice_number}.txt"
+
+    with open(invoice_filename, "w") as f:
+        f.write("----- Neapolina Pizzaria Invoice -----\n\n")
+        f.write(f"Invoice Number: {invoice_number}\n")
+        f.write(f"Customer Name: {customer_name}\n")
+        f.write(f"Date: {invoice_date}\n\n")
+        f.write("Items:\n")
+
+        for item, details in cart.items():
+            f.write(f"- {item}: {details['quantity']} x ${details['price']} = ${details['quantity'] * details['price']:.2f}\n")
+
+        if selected_addons:
+            f.write("\nAdd-Ons:\n")
+            for addon, price in selected_addons.items():
+                f.write(f"- {addon}: ${price:.2f}\n"
+                        )
+        f.write(f"\nTotal: ${total:.2f}\n")
+
+    # Function to clear the cart and the rest of items after checkout is finished
+
+    session.pop("cart", None)
+    session.pop("selected_addons", None)
+    session.modified = True
+
+    return render_template(
+        "invoice.html", customer_name=customer_name, total=total,
+        invoice_date=invoice_date, invoice_number=invoice_number, cart=cart,
+        pizza_subtotal=pizza_subtotal, addon_subtotal=addon_subtotal,
+        selected_addons=selected_addons, discount=discount, discount_applied=discount_applied,
+    )
 
 if __name__ == '__main__': 
       initialise_database()
