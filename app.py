@@ -163,7 +163,15 @@ def checkout():
     invoice_date = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
     invoice_number = f"INV_{customer_name.replace(' ', '_')}_{invoice_date}"
 
-
+    # Save order to database pizzaria
+    with sqlite3.connect ('pizzaria.db') as conn:
+     cursor = conn.cursor()
+     cursor.execute('''
+      INSERT INTO orders (invoice_number, customer_name, items, addons, total)
+      VALUES (?, ?, ?, ?, ?)
+    ''', (invoice_number, customer_name, json.dumps(cart),  json.dumps(selected_addons), total))
+    conn.commit()
+    
 
 if __name__ == '__main__': 
       initialise_database()
