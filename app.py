@@ -72,10 +72,17 @@ def load_data():
 # Function for the add to cart function
 
 def add_to_cart():
-        pizza = request.form.get("pizza")
-        quantity = int(request.form.get("quantity"))
-        pizzas, addons = load_data()
-        cart = session.get("cart", {})
+    pizza = request.form.get("pizza")
+    quantity = int(request.form.get("quantity"))
+    pizzas, addons = load_data()
+    cart = session.get("cart", {})
+
+    if pizza not in pizzas:
+        flash("Selected pizza is invalid.")
+        return redirect(url_for("menu"))
+    
+    
+
 
 if __name__ == '__main__': 
       initialise_database()
