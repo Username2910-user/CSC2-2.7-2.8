@@ -59,4 +59,10 @@
   <p>Discount (25%): -${{ '%.2f'|format(discount) }}</p>
   {% endif %}
   <h3>Total: ${{ '%.2f'|format(total) }}</h3>
-        
+ 
+ <label for="customer_name_checkout">Your Name</label>
+  <input type="text" name="customer_name" id="customer_name_checkout" required>
+  <button type="submit" formaction="{{ url_for('checkout') }}">Checkout</button>
+  <button type="submit" formaction="{{ url_for('cancel_order') }}"
+    onclick="return confirm('Are you sure you want to cancel your order?')">Cancel Order</button>
+</form> 
