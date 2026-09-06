@@ -91,7 +91,16 @@ def add_to_cart():
     if current_quantity + quantity > available_dough:
         flash(f"Sorry, you can only order {available_dough - current_quantity} more of {pizza}.")
         return redirect(url_for("menu"))
-        
+
+    if pizza in cart:
+        cart[pizza]["quantity"] += quantity
+    else:
+        cart[pizza] = {"price": pizzas[pizza]["price"], "quantity": quantity}
+
+    session["cart"] = cart
+    session.modified = True
+    flash(f"{quantity} {pizza}(s) added to cart.")
+    return redirect(url_for("menu"))    
     
 
 
