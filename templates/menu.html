@@ -5,11 +5,16 @@
 <h1>Menu</h1>
 
 <form action="{{ url_for('add_to_cart')}}" method="post">
-    <fieldset>
+  <fieldset>
         <legend>Select Your Preferred Pizza</legend>
         <select name="pizza" id="pizza">
         {% for pizza, details in pizzas.items() %}
         <option value="{{ pizza }}">{{ pizza }} - ${{ details['price'] }} (Stock: {{ details['stock'] }})</option>
         {% endfor %}
     </select>
+    <label for="quantity">Quantity</label>
+    <input type="number" name="quantity" id="quantity" value="1" min="1">
+    <button type="submit">Add to Cart</button>
+  </fieldset>
+</form>
         
