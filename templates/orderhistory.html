@@ -17,3 +17,27 @@
       <th>Action</th>
     </tr>
   </thead>
+ 
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order['invoice_number'] }}</td>
+      <td>{{ order['customer_name'] }}</td>
+      <td>
+        <ul>
+          {% for item, details in order['items'].items() %}
+          <li>{{ item }} x {{ details['quantity'] }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+      <td>
+        <ul>
+          {% for addon, price in order['addons'].items() %}
+          <li>{{ addon }} - ${{ '%.2f'|format(price) }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+      <td>${{ '%.2f'|format(order['total']) }}</td>
+      <td>{{ order['date'] }}</td>
+      <td>
+</table>        
