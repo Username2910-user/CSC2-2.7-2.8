@@ -1,5 +1,24 @@
 {
  "Margherita": {
-        "price": 16.78
+        "price": 18.78,
+        "base": "red",
+        "tags": [
+      "TOMATO SAUCE BASE ",
+      "FRESH MOZZRELLA",
+      "OLIVE OIL",
+      "BASIL LEAVES"
+    ]
     } 
+ "Marinara": {
+      "price":18.65,
+      "base":"tomato red",
+      "tags": [
+      "TOMATO SAUCE BASE ",
+      "GARLIC",
+      "OLIVE OIL",
+      "OREGANO"
+    ]
+
+ }  
+
 }    

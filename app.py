@@ -2,8 +2,11 @@ import json
 import datetime
 import sqlite3
 
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 
-app = Flask(____name____)
+
+app = Flask(__name__)
+
 app.secret_key = "pizzaria_pizza"
 
 def initialise_database():
@@ -22,17 +25,26 @@ def initialise_database():
     ''')
     conn.commit()
 
+def save_order(customer_name, product_name, quantity, total_price):
+    """INSERT one row into the orders table. Called when checkout happens."""
+    connection = sqlite3.connect('pizzaria.db')
+    connection.execute(
+        "INSERT INTO orders (customer_name, product_name, quantity, total_price) VALUES (?, ?, ?, ?)",
+        (customer_name, product_name, quantity, total_price),
+    )
+    connection.commit()
+
+@app.route('/about')
+def about():
+  return render_template('menu.html')
+
+
 # Function for index 
 @app.route('/')
 def index():
-  pizza, addons = load_data()
-  cart = session.get('cart', {})
-  selected_addons = session.get('selected_addons', {})
-  total, pizza_subtotal, addon_subtotal, discount, discount_applied = calculate_total(cart, selected_addons)
-  return render_template("index.html", pizzas=pizza_subtotal, addons=addons, cart=cart, total=total, selected_addons=selected_addons, 
-                         pizza_subtotal=pizza_subtotal, addon_subtotal=addon_subtotal, discount= discount, discount_applied= discount_applied )
 
 
-if_name_== '__main__':
-initalise_database()
-app.run(debug=True)
+if __name__ == '__main__': 
+      
+    initialise_database()
+    app.run(debug=True)
