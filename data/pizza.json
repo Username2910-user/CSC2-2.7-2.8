@@ -1,24 +1,49 @@
 {
- "Margherita": {
+    "Margherita": {
         "price": 18.78,
-        "base": "red",
-        "tags": [
-      "TOMATO SAUCE BASE ",
-      "FRESH MOZZRELLA",
-      "OLIVE OIL",
-      "BASIL LEAVES"
-    ]
-    } 
- "Marinara": {
-      "price":18.65,
-      "base":"tomato red",
-      "tags": [
-      "TOMATO SAUCE BASE ",
-      "GARLIC",
-      "OLIVE OIL",
-      "OREGANO"
-    ]
+        "dough": 9,
+        "base": "red"
+        
+    },
+    "Marinera": {
+        "price": 16.56,
+        "dough": 6,
+        "base": "red"
+    },
+    "Capricciosa": {
+        "price": 17.59,
+        "dough": 12,
+        "base": "red"
+    },
+    "Diavola": {
+        "price": 18,
+        "dough": 8,
+        "base":"red"
+    },
+    "Quattro Stagioni": {
+        "price": 13,
+        "dough": 8,
+        "base": "Orange"
 
- }  
-
-}    
+    },
+    "Boscaiola": {
+        "price": 16,
+        "dough": 8,
+        "base" : "Creamy Beige"
+    },
+    "Quattro Formaggi": {
+        "price": 14,
+        "dough": 8,
+        "base" : "Creamy Cheese"
+    },
+    "Vegetariano": {
+        "price": 14,
+        "dough": 8,
+        "base" : "Vegan Cheese"
+    },
+    "Bianca Agilo": {
+        "price": 14,
+        "dough": 8,
+        "base" : "Creamy Light"
+    }
+}
