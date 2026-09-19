@@ -5,17 +5,17 @@
 <h1>Menu</h1>
 
 <form action="{{ url_for('add_to_cart')}}" method="post">
-  <fieldset>
-        <legend>Select Your Preferred Pizza</legend>
-        <select name="pizza" id="pizza">
-        {% for pizza, details in pizzas.items() %}
-        <option value="{{ pizza }}">{{ pizza }} - ${{ details['price'] }} (Stock: {{ details['stock'] }})</option>
-        {% endfor %}
-    </select>
-    <label for="quantity">Quantity</label>
-    <input type="number" name="quantity" id="quantity" value="1" min="1">
-    <button type="submit">Add to Cart</button>
-  </fieldset>
+   <legend>Select Pizza</legend>
+        <div class="form-row">
+          <select name="pizza" id="pizza">
+            {% for pizza, details in pizzas.items() %}
+            <option value="{{ pizza }}">{{ pizza }} - ${{ details['price'] }} (Dough: {{ details['dough'] }})</option>
+            {% endfor %}
+          </select>
+          <input type="number" name="quantity" id="quantity" value="1" min="1">
+          <button type="submit">Add to Cart</button>
+        </div>
+      </fieldset> 
 </form>
 
 <form action="{{ url_for('select_addon') }}" method="post">
@@ -56,7 +56,7 @@
   <p>Pizza Subtotal: ${{ '%.2f'|format(pizza_subtotal) }}</p>
   <p>Add-on Subtotal: ${{ '%.2f'|format(addon_subtotal) }}</p>
   {% if discount_applied %}
-  <p>Discount (25%): -${{ '%.2f'|format(discount) }}</p>
+  <p>Discount (10%): -${{ '%.2f'|format(discount) }}</p>
   {% endif %}
   <h3>Total: ${{ '%.2f'|format(total) }}</h3>
  
