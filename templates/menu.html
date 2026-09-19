@@ -2,6 +2,30 @@
 {% block title %}Menu - Neapolina Pizzaria{% endblock %}
 {% block content %}
 
+<section class="menu-hero">
+  <div class="container">
+    <h1 class="menu-title">The Menu</h1>
+    <p>Pick a pizza below, then build your order in the panel underneath.</p>
+  </div>
+</section>
+
+ <div class="pizza-grid">
+    {% for pizza, details in pizzas.items() %}
+    <div class="pizza-card">
+      <span class="price-tag">${{ details['price'] }}</span>
+      <h3>{{ pizza }}</h3>
+      <span class="dough-note {% if details['dough'] <= 3 %}low{% endif %}">
+        {% if details['dough'] > 0 %}{{ details['dough'] }} in dough{% else %}Out of dough{% endif %}
+      </span>
+      <button type="button" class="select-pizza-btn"
+              onclick="document.getElementById('pizza').value='{{ pizza }}'; document.getElementById('order-maker').scrollIntoView({behavior:'smooth'});">
+        Select
+      </button>
+    </div>
+    {% endfor %}
+  </div>
+
+
 <div class="container"> 
 
  <div class="order-maker" id="order-maker">
