@@ -2,11 +2,16 @@
 {% block title %}Menu - Neapolina Pizzaria{% endblock %}
 {% block content %}
 
-<h1>Menu</h1>
+<div class="container"> 
 
-<form action="{{ url_for('add_to_cart')}}" method="post">
-   <legend>Select Pizza</legend>
-        <div class="form-row">
+ <div class="order-maker" id="order-maker">
+
+  <h2>Make Your Pizza</h2>
+
+ <form action="{{ url_for('add_to_cart')}}" method="post">
+     <fieldset> 
+       <legend>Select Pizza</legend>
+         <div class="form-row">
           <select name="pizza" id="pizza">
             {% for pizza, details in pizzas.items() %}
             <option value="{{ pizza }}">{{ pizza }} - ${{ details['price'] }} (Dough: {{ details['dough'] }})</option>
@@ -16,55 +21,61 @@
           <button type="submit">Add to Cart</button>
         </div>
       </fieldset> 
-</form>
+ </form>
 
-<form action="{{ url_for('select_addon') }}" method="post">
+ <form action="{{ url_for('select_addon') }}" method="post">
   <fieldset>
-    <legend>Add-ons</legend>
-    {% for addon, data in addons.items() %}
-    <input type="checkbox" name="addons" id="{{ addon }}" value="{{ addon }}" {% if addon in selected_addons %}checked{% endif %}>
-    <label for="{{ addon }}">{{ addon }} (${{ data.price }})</label><br>
-    {% endfor %}
-    <button type="submit">Update Add-ons</button>
-  </fieldset>
-</form>
+        <legend>Add-ons</legend>
+        <div class="addon-toggles">
+          {% for addon, data in addons.items() %}
+          <label>
+            <input type="checkbox" name="addons" id="{{ addon }}" value="{{ addon }}" {% if addon in selected_addons %}checked{% endif %}>
+            <span class="addon-chip">{{ addon }} &middot; ${{ data.price }}</span>
+          </label>
+          {% endfor %}
+        </div>
+        <div class="form-row" style="margin-top:16px;">
+          <button type="submit">Update Add-ons</button>
+        </div>
+      </fieldset>
+ </form>
 
-<h2>Your Cart</h2>
-<form method="post">
-{% if cart %}
-  <ul>
-    {% for item, details in cart.items() %}
-    <li>
-      {{ item }}: {{ details['quantity'] }} x ${{ details['price'] }}
-      = ${{ '%.2f'|format(details['quantity'] * details['price']) }}
-      <a href="{{ url_for('remove_from_cart', item=item) }}">[Remove]</a>
-    </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p>Your cart is empty.</p>
-  {% endif %}
+ <h2>Your Cart</h2>
+ <form method="post">
+   {% if cart %}
+   <ul>
+     {% for item, details in cart.items() %}
+     <li>
+       {{ item }}: {{ details['quantity'] }} x ${{ details['price'] }}
+       = ${{ '%.2f'|format(details['quantity'] * details['price']) }}
+       <a href="{{ url_for('remove_from_cart', item=item) }}">[Remove]</a>
+     </li>
+     {% endfor %}
+   </ul>
+   {% else %}
+   <p>Your cart is empty.</p>
+   {% endif %}
 
-  {% if selected_addons %}
-  <ul>
-    {% for item, price in selected_addons.items() %}
-    <li>{{ item }} - ${{ '%.2f'|format(price) }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+   {% if selected_addons %}
+   <ul>
+     {% for item, price in selected_addons.items() %}
+     <li>{{ item }} - ${{ '%.2f'|format(price) }}</li>
+     {% endfor %}
+   </ul>
+   {% endif %}
 
-  <p>Pizza Subtotal: ${{ '%.2f'|format(pizza_subtotal) }}</p>
-  <p>Add-on Subtotal: ${{ '%.2f'|format(addon_subtotal) }}</p>
-  {% if discount_applied %}
-  <p>Discount (10%): -${{ '%.2f'|format(discount) }}</p>
-  {% endif %}
-  <h3>Total: ${{ '%.2f'|format(total) }}</h3>
+   <p>Pizza Subtotal: ${{ '%.2f'|format(pizza_subtotal) }}</p>
+   <p>Add-on Subtotal: ${{ '%.2f'|format(addon_subtotal) }}</p>
+   {% if discount_applied %}
+   <p>Discount (10%): -${{ '%.2f'|format(discount) }}</p>
+   {% endif %}
+   <h3>Total: ${{ '%.2f'|format(total) }}</h3>
  
- <label for="customer_name_checkout">Your Name</label>
-  <input type="text" name="customer_name" id="customer_name_checkout" required>
-  <button type="submit" formaction="{{ url_for('checkout') }}">Checkout</button>
-  <button type="submit" formaction="{{ url_for('cancel_order') }}"
+   <label for="customer_name_checkout">Your Name</label>
+    <input type="text" name="customer_name" id="customer_name_checkout" required>
+    <button type="submit" formaction="{{ url_for('checkout') }}">Checkout</button>
+    <button type="submit" formaction="{{ url_for('cancel_order') }}"
     onclick="return confirm('Are you sure you want to cancel your order?')">Cancel Order</button>
-</form> 
-
+  </form> 
+</div>
 {% endblock %}
