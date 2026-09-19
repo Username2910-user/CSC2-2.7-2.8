@@ -1,30 +1,47 @@
 {% extends "base.html" %}
 
-{block content}
+{% block content %}
 
- <h2>Invoice</h2>
-    <h3>Invoice_Number:</h3> {{ invoice_number }}
-    <h3>Date: </h3> {{invoice_date}}
-    <h3>Customer Name:</h3> {{ customer_name }}
+<section class="page-section container">
+  <div class ="invoice-card">
+
+    <h1>Invoice</h1>
+      <h3 class="invoice-meta">Invoice_Number:</h3> {{ invoice_number }}
+      <h3 class="invoice-meta">Date: </h3> {{invoice_date}}
+      <h3 class="invoice-meta">Customer Name:</h3> {{ customer_name }}
 
     <h2>Items</h2>
-    <ul>
-        {% for item, details in cart.items() %}
-        <li> {{ item }}: {{ details['quantity'] }} x ${{ details['price'] }} = ${{ details['quantity'] * details['price'] }}</li>
-        {% endfor %}
+    <ul class="invoice-line-list">
+       {% for item, details in cart.items() %}
+       <li>
+          <span>{{ item }} &times; {{ details['quantity'] }}</span>
+          <span>${{ '%.2f'|format(details['quantity'] * details['price']) }}</span>
+       </li>
+       {% endfor %}
     </ul>
 
-{% if selected_addons %}
-<h2>Add-ons</h2>
-<ul>
-  {% for item, price in selected_addons.items() %}
-  <li>{{ item }}: ${{ '%.2f'|format(price) }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+   {% if selected_addons %}
+   <h2>Add-ons</h2>
+   <ul class = "invoice-line-list">
+     {% for item, price in selected_addons.items() %}
+     <li><span>{{ item }}:</span><span> ${{ '%.2f'|format(price) }}</span></li>
+     {% endfor %}
+   </ul>
+   {% endif %}
 
-<a href="{{ url_for('index') }}">Back to Home</a>
+   <div class="invoice-totals">
+      {% if discount_applied %}
+      <div class="summary-row discount"><span>Discount (10%)</span><span>-${{ '%.2f'|format(discount) }}</span></div>
+      {% endif %}
+      <div class="summary-row total"><span>Total</span><span>${{ '%.2f'|format(total) }}</span></div>
+   </div>
 
+   <div class="invoice-actions">
+      <a href="{{ url_for('index') }}">Back to Home</a>
+   </div>
+
+  </div> 
+</section>
 {% endblock %}
 
 
