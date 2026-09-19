@@ -43,8 +43,7 @@
  <h2>Your Cart</h2>
  
  <form method="post">
-   
-  {% if cart %}
+   {% if cart %}
    <ul class="cart-line-list">
      {% for item, details in cart.items() %}
      <li class="cart-line">
@@ -66,18 +65,21 @@
    </ul>
    {% endif %}
 
-   <p>Pizza Subtotal: ${{ '%.2f'|format(pizza_subtotal) }}</p>
-   <p>Add-on Subtotal: ${{ '%.2f'|format(addon_subtotal) }}</p>
-   {% if discount_applied %}
-   <p>Discount (10%): -${{ '%.2f'|format(discount) }}</p>
-   {% endif %}
-   <h3>Total: ${{ '%.2f'|format(total) }}</h3>
- 
-   <label for="customer_name_checkout">Your Name</label>
-    <input type="text" name="customer_name" id="customer_name_checkout" required>
-    <button type="submit" formaction="{{ url_for('checkout') }}">Checkout</button>
-    <button type="submit" formaction="{{ url_for('cancel_order') }}"
-    onclick="return confirm('Are you sure you want to cancel your order?')">Cancel Order</button>
+    <div class="summary-row"><span>Pizza Subtotal</span><span>${{ '%.2f'|format(pizza_subtotal) }}</span></div>
+    <div class="summary-row"><span>Add-on Subtotal</span><span>${{ '%.2f'|format(addon_subtotal) }}</span></div>
+    {% if discount_applied %}
+    <div class="summary-row discount"><span>Discount (10%)</span><span>-${{ '%.2f'|format(discount) }}</span></div>
+    {% endif %}
+    <div class="summary-row total"><span>Total</span><span>${{ '%.2f'|format(total) }}</span></div>
+
+   <div class="checkout-row">
+     <label for="customer_name_checkout">Your Name</label>
+     <input type="text" name="customer_name" id="customer_name_checkout" required>
+     <button type="submit" formaction="{{ url_for('checkout') }}">Checkout</button>
+     <button type="submit" formaction="{{ url_for('cancel_order') }}"
+      onclick="return confirm('Are you sure you want to cancel your order?')">Cancel Order</button>
+   </div>
+  
   </form> 
 </div>
 {% endblock %}
