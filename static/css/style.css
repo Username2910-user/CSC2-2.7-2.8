@@ -698,3 +698,22 @@ table button {
   padding: 7px 12px;
 }
 table button:hover { border-color: var(--red-warn); color: var(--red-warn); background: transparent; }
+
+.footer {
+  border-top: 1px solid var(--line-dark);
+  padding: 34px 0;
+}
+
+.footer-inner {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(244,239,224,0.4);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
