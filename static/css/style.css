@@ -269,3 +269,85 @@ button[formaction*="cancel_order"]:hover {
   color: var(--red-warn);
   background: transparent;
 }
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--cream-2);
+  color: var(--ink);
+}
+
+.split-copy {
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.split-copy .eyebrow { margin-bottom: 16px; }
+
+.split-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(34px, 4vw, 48px);
+  line-height: 1.05;
+  color: var(--maroon);
+  margin: 0 0 18px;
+}
+
+.split-copy p.body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--body-on-cream);
+  max-width: 400px;
+  margin: 0 0 28px;
+}
+
+.split-visual {
+  position: relative;
+  background: linear-gradient(155deg, var(--maroon-2) 0%, var(--maroon) 55%, #2a0505 100%);
+  min-height: 320px;
+}
+
+.split-badge {
+  position: absolute;
+  bottom: 22px;
+  right: 22px;
+  background: var(--orange);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 820px) {
+  .split { grid-template-columns: 1fr; }
+  .split-copy { padding: 56px 28px; }
+}
+
+.page-head {
+  padding: 50px 0 28px;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(32px, 4.5vw, 44px);
+  margin: 0;
+}
+
+.page-section { padding: 44px 0 90px; }
+
+.page-section p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(244,239,224,0.8);
+  max-width: 560px;
+}
