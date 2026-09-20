@@ -661,3 +661,40 @@ select option { background: var(--bg-dark); }
 .invoice-totals { margin-top: 18px; }
 
 .invoice-actions { margin-top: 28px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(244,239,224,0.45);
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line-dark-strong);
+}
+
+td {
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--line-dark);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  vertical-align: top;
+}
+
+td ul { list-style: none; margin: 0; padding: 0; }
+td ul li { font-family: var(--font-mono); font-size: 11.5px; color: rgba(244,239,224,0.6); padding: 2px 0; }
+
+table button {
+  background: transparent;
+  border: 1px solid var(--line-dark-strong);
+  color: rgba(244,239,224,0.6);
+  font-size: 10.5px;
+  padding: 7px 12px;
+}
+table button:hover { border-color: var(--red-warn); color: var(--red-warn); background: transparent; }
