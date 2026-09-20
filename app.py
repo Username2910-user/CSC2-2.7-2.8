@@ -59,9 +59,9 @@ def calculate_total(cart, selected_addons):
     return total, pizza_subtotal, addon_subtotal, discount, discount_applied
 def load_data():
     try:
-        with open('pizza.json') as file:
+        with open('data/pizza.json') as file:
             pizzas = json.load(file)
-        with open('addons.json') as file:
+        with open('data/addons.json') as file:
             addons = json.load(file)
         return pizzas, addons
     except (FileNotFoundError, json.JSONDecodeError) as e:
@@ -73,7 +73,7 @@ def load_data():
 @app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
     pizza = request.form.get("pizza")
-    quantity = int(request.form.get("quantity"))
+    quantity = int(request.form.get("quantity", 1))
     pizzas, addons = load_data()
     cart = session.get("cart", {})
 
@@ -81,8 +81,8 @@ def add_to_cart():
         flash("Selected pizza is invalid.")
         return redirect(url_for("menu"))
     
-    available_dough = pizzas[pizza]['dough']
-    current_quantity = cart[pizza]['quantity', 0] if pizzas in cart else 0
+    available_dough = pizzas[pizza].get('dough', 0)
+    current_quantity = cart[pizza].get('quantity', 0) if pizza in cart else 0
 
     if available_dough <= 0:
         flash(f"Sorry, {pizza} is out of dough.")
@@ -140,7 +140,7 @@ def cancel_order():
     session.pop("selected_addons", None)
     flash("Order is canceled.")
     return redirect(url_for("menu")) 
-
+    
 # Function 6 for the checkout function
 
 @app.route("/checkout", methods=["POST"])
@@ -225,8 +225,8 @@ def checkout():
 
 # Function 7: Order or Order History function
 
-app.route("/orders")
-def orders_history():
+@app.route("/orders")
+def order_history():
     with sqlite3.connect('pizzaria.db') as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM orders ORDER BY date DESC")

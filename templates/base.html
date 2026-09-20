@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% bottle title %} Neapolina Pizzaria Pizza de Nappoli{endblock %} </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Neapolina Pizzaria{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-   <nav class="nav">
+
+  <nav class="nav">
     <div class="nav-inner">
-        <a href="{{url_for('index')}}" class="brand" aria-label="Neapolina Pizzaria home">
-            <span>NEAPOILNA<br>PIZZARIA</span>
-        </a>
-    <ul class="nav-links">
-      <a href="{{ url_for('index')}}">Home</a>
-      <a href="{{ url_for('about')}}">About</a>
-      <a href="{{ url_for('order_history')}}">Order History</a>
-      <a href="{{url_for(menu)}}">Menu</a>
+      <a href="{{ url_for('index') }}" class="brand" aria-label="Neapolina Pizzaria home">
+        <span>NEAPOLINA<br>PIZZARIA</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('menu') }}">Menu</a></li>
+        <li><a href="{{ url_for('order_history') }}">Order History</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}<li>{{ message }}</li>{% endfor %}
     </ul>
-    </nav> 
+    {% endif %}
+  {% endwith %}
 
-<main>
+  <main class="container">
     {% block content %}{% endblock %}
-</main>    
+  </main>
 
-<footer class="footer">
-<div class="container footer-inner">
-     <span>&copy; {{ 2026 }} Neapolina Pizzaria</span>
-</div>
-</footer>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; 2026 Neapolina Pizzaria</span>
+    </div>
+  </footer>
 
 </body>
 </html>
-
-    
-    
-
-
 
             
