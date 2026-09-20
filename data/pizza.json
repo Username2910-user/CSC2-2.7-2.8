@@ -16,33 +16,33 @@
         "base": "red"
     },
     "Diavola": {
-        "price": 18,
+        "price": 15.99,
         "dough": 8,
         "base":"red"
     },
     "Quattro Stagioni": {
-        "price": 13,
+        "price": 16.34,
         "dough": 8,
         "base": "Orange"
 
     },
     "Boscaiola": {
-        "price": 16,
+        "price": 16.78,
         "dough": 8,
         "base" : "Creamy Beige"
     },
     "Quattro Formaggi": {
-        "price": 14,
+        "price": 17.23,
         "dough": 8,
         "base" : "Creamy Cheese"
     },
     "Vegetariano": {
-        "price": 14,
+        "price": 15.54,
         "dough": 8,
         "base" : "Vegan Cheese"
     },
     "Bianca Agilo": {
-        "price": 14,
+        "price": 17.34,
         "dough": 8,
         "base" : "Creamy Light"
     }
