@@ -309,6 +309,13 @@ button[formaction*="cancel_order"]:hover {
   position: relative;
   background: linear-gradient(155deg, var(--maroon-2) 0%, var(--maroon) 55%, #2a0505 100%);
   min-height: 320px;
+  overflow: hidden;
+}
+
+.split-visual img { width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .split-badge {
