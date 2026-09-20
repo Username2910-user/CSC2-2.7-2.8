@@ -3,13 +3,31 @@
 {% block content%}
 
 <section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+   
+    <div clas="hero-orbit-wrap">
+      <div class="orbit">
+        <svg viewBox="0 0 280 280">
+          <circle class="orbit-ring-dotted orbit-spin-rev" cx="140" cy="140" r="134" />
+          <circle class="orbit-ring-solid orbit-spin" cx="140" cy="140" r="108" />
+          <g class="orbit-spin">
+            <path id="orbitPath" fill="none" d="M 140,32 A 108,108 0 1 1 139.9,32" />
+            <text class="orbit-text">
+              <textPath href="#orbitPath" startOffset="0%">
+                IMPASTO &middot; POMODORO &middot; MOZZARELLA  &middot; BASILICA FRESCA &middot; OLIO D'OLIVA &middot; PIZZA MARGHERTIA &middot;
+              </textPath>
+            </text>
+          </g>
+        </svg>
 
 
 
 
 
 
-  
+
+
   <h1 class="hero-title">Neapolina Pizzaria</h1>
   <p>Fresh pizza, made the old fashioned way.</p>
   <a class="btn" href="{{ url_for('menu') }}">Order Now</a>
