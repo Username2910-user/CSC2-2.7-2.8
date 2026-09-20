@@ -1,1 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-dark: #101d15;
+  --bg-dark-2: #17281d;
+  --panel-dark: #16251b;
+  --cream: #f4efe0;
+  --cream-2: #f1e7d6;
+  --orange: #e2672b;
+  --orange-dim: #b8531f;
+  --maroon: #5c0a0a;
+  --maroon-2: #7a0f0f;
+  --ink: #101d15;
+  --body-on-cream: #2c4436;
+  --line-dark: rgba(244, 239, 224, 0.16);
+  --line-dark-strong: rgba(244, 239, 224, 0.32);
+  --green-ok: #5fb890;
+  --red-warn: #c85454;
+
+  --font-display: 'Libertinus Serif', 'Georgia', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+
+  --radius-sm: 2px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg-dark);
+  color: var(--cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+
