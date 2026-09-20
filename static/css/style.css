@@ -351,3 +351,93 @@ button[formaction*="cancel_order"]:hover {
   color: rgba(244,239,224,0.8);
   max-width: 560px;
 }
+
+.menu-hero {
+  background-color: var(--panel-dark);
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.16) 50%, transparent 50%),
+    linear-gradient(rgba(0,0,0,0.16) 50%, transparent 50%);
+  background-size: 34px 34px;
+  padding: 48px 0 36px;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.menu-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(36px, 5vw, 50px);
+  margin: 0 0 6px;
+  color: var(--cream);
+}
+
+.menu-hero p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(244,239,224,0.55);
+  margin: 0;
+}
+
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 36px 0 48px;
+}
+
+.pizza-card {
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-sm);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s ease;
+}
+
+.pizza-card:hover { border-color: var(--orange-dim); }
+
+.pizza-card .price-tag {
+  align-self: flex-start;
+  background: var(--orange);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+}
+
+.pizza-card h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 21px;
+  margin: 0;
+  color: var(--cream);
+}
+
+.pizza-card .dough-note {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(244,239,224,0.45);
+}
+
+.pizza-card .dough-note.low { color: var(--red-warn); }
+
+.pizza-card button.select-pizza-btn {
+  margin-top: 6px;
+  background: transparent;
+  border: 1px solid var(--line-dark-strong);
+  color: var(--cream);
+  font-size: 11px;
+  padding: 9px 14px;
+}
+.pizza-card button.select-pizza-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  background: transparent;
+}
