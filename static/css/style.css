@@ -40,7 +40,7 @@ button { font-family: inherit; cursor: pointer; }
 img { max-width: 100%; display: block; }
 
 .container {
-  max-width: 1000px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 40px;
 }
@@ -63,7 +63,7 @@ img { max-width: 100%; display: block; }
   z-index: 50;
 }
 
-.nav-inner { max-width: 1000px;
+.nav-inner { max-width: 100%;
   margin: 0 auto;
   padding: 18px 40px;
   display: flex;
@@ -130,7 +130,7 @@ img { max-width: 100%; display: block; }
 }
 
 .flashes li {
-  max-width: 1000px;
+  max-width: 100%;
   margin: 0 auto;
   font-family: var(--font-mono);
   font-size: 12px;
@@ -225,7 +225,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-body);
   font-size: 16px;
   color: rgba(244,239,224,0.75);
-  max-width: 460px;
+  max-width: 100%;
   margin: 0 auto 28px;
 }
 
@@ -301,7 +301,7 @@ button[formaction*="cancel_order"]:hover {
   font-size: 15px;
   line-height: 1.6;
   color: var(--body-on-cream);
-  max-width: 400px;
+  max-width: 100%;
   margin: 0 0 28px;
 }
 
@@ -349,7 +349,7 @@ button[formaction*="cancel_order"]:hover {
   font-size: 15px;
   line-height: 1.65;
   color: rgba(244,239,224,0.8);
-  max-width: 560px;
+  max-width: 100%;
 }
 
 .menu-hero {
@@ -716,4 +716,41 @@ table button:hover { border-color: var(--red-warn); color: var(--red-warn); back
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 2px;
+}
+
+.story-box {
+  background: rgba(244, 239, 224, 0.04);
+  border: 1px solid rgba(244, 239, 224, 0.16);
+  border-radius: 8px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+}
+
+.story-box p {
+  margin: 0 0 18px;
+  color: rgba(244, 239, 224, 0.8);
+  line-height: 1.7;
+}
+
+.story-box p:last-child {
+  margin-bottom: 0;
+}
+
+.about-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.about-list li {
+  background: rgba(226, 103, 43, 0.08);
+  border: 1px solid rgba(226, 103, 43, 0.25);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
 }
