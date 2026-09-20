@@ -441,3 +441,94 @@ button[formaction*="cancel_order"]:hover {
   color: var(--orange);
   background: transparent;
 }
+
+.order-maker {
+  border: 1px solid var(--line-dark-strong);
+  border-radius: var(--radius-sm);
+  padding: 32px;
+  margin-bottom: 40px;
+}
+
+.order-maker h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  margin: 0 0 20px;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 28px;
+}
+
+fieldset:last-of-type { margin-bottom: 0; }
+
+legend {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  padding: 0 0 12px;
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+select, input[type="text"], input[type="number"] {
+  background: rgba(244,239,224,0.04);
+  border: 1px solid var(--line-dark-strong);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+}
+
+select { min-width: 220px; }
+input[type="number"] { width: 80px; }
+
+select option { background: var(--bg-dark); }
+
+.addon-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.addon-toggles label {
+  position: relative;
+  display: inline-block;
+}
+
+.addon-toggles input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.addon-chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 9px 13px;
+  border: 1px solid var(--line-dark-strong);
+  border-radius: var(--radius-sm);
+  color: rgba(244,239,224,0.7);
+  transition: all 0.12s ease;
+}
+
+.addon-toggles input:checked + .addon-chip {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--ink);
+}
