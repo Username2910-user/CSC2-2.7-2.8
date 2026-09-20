@@ -121,3 +121,21 @@ img { max-width: 100%; display: block; }
   .nav-links { display: none; }
 }
 
+.flashes {
+  list-style: none;
+  margin: 0;
+  padding: 14px 40px;
+  background: var(--panel-dark);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.flashes li {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--orange);
+}
+
+.flashes li + li { margin-top: 6px; }
