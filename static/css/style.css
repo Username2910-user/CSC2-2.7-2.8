@@ -139,3 +139,49 @@ img { max-width: 100%; display: block; }
 }
 
 .flashes li + li { margin-top: 6px; }
+
+.orbit {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+}
+
+.orbit svg { width: 100%; height: 100%; }
+
+.orbit-ring-dotted {
+  fill: none;
+  stroke: var(--orange-dim);
+  stroke-width: 1;
+  stroke-dasharray: 1 6;
+}
+
+.orbit-ring-solid {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 1;
+}
+
+.orbit-text {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  fill: var(--orange);
+  text-transform: uppercase;
+}
+
+.orbit-spin { animation: orbit-rotate 34s linear infinite; transform-origin: 50% 50%; }
+.orbit-spin-rev { animation: orbit-rotate-rev 46s linear infinite; transform-origin: 50% 50%; }
+
+@keyframes orbit-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes orbit-rotate-rev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+
+.orbit-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  color: var(--orange);
+}
