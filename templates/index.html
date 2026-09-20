@@ -4,8 +4,20 @@
 
 <section class="hero">
   <h1>Neapolina Pizzaria</h1>
-  <p>Fresh pizza, made simple.</p>
+  <p>Fresh pizza, made the old fashioned way.</p>
   <a class="btn" href="{{ url_for('menu') }}">Order Now</a>
+</section>
+
+<section class="split">
+  <div class="split-copy"
+  <span class="eyebrow">The Ethos</span>
+    <h2 class="split-title">History ,Flour, and Fire.</h2>
+    <p class="body">In the heart of Naples, where the tradition of pizza-making is alive and well. This city had orginated from a Greek colony, A Roman wonder, A Byzantine legacy, to a Modern Italian culinary Metropolis. Its heart beats with the rhythm of generations and architecture of the mediterranean. The blsitering heat from a dome oven fueled by the volcanic fire of vesuvius, to  the wheat grown from generations of farmers that are used to make the dough. The pizza itself was forged to keep the poor of Napoli fed using ingredients both foreign and domestic, to becoming a symbol of Napolitan culture for centuries to come.</p>
+    <a href="{{ url_for('menu') }}" class="btn">Explore the Menu</a>
+  </div>
+  <div class="split-visual">
+    <span class="split-badge">Image</span>
+  </div>
 </section>
 
 {% endblock %}
