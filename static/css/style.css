@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  --bg-dark: #101d15;
+  --bg-dark: hsl(143, 29%, 9%);
   --bg-dark-2: #17281d;
   --panel-dark: #16251b;
   --cream: #f4efe0;
@@ -14,7 +14,7 @@
   --body-on-cream: #2c4436;
   --line-dark: rgba(244, 239, 224, 0.16);
   --line-dark-strong: rgba(244, 239, 224, 0.32);
-  --green-ok: #5fb890;
+  --green-ok: #22bd60;
   --red-warn: #c85454;
 
   --font-display: 'Libertinus Serif', 'Georgia', serif;
@@ -44,6 +44,7 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
   padding: 0 40px;
 }
+
 
 .eyebrow {
   font-family: var(--font-mono);
@@ -140,51 +141,14 @@ img { max-width: 100%; display: block; }
 
 .flashes li + li { margin-top: 6px; }
 
-.orbit {
+.pin {
   position: relative;
   width: 280px;
   height: 280px;
   flex-shrink: 0;
 }
 
-.orbit svg { width: 100%; height: 100%; }
 
-.orbit-ring-dotted {
-  fill: none;
-  stroke: var(--orange-dim);
-  stroke-width: 1;
-  stroke-dasharray: 1 6;
-}
-
-.orbit-ring-solid {
-  fill: none;
-  stroke: var(--orange);
-  stroke-width: 1;
-}
-
-.orbit-text {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  fill: var(--orange);
-  text-transform: uppercase;
-}
-
-.orbit-spin { animation: orbit-rotate 34s linear infinite; transform-origin: 50% 50%; }
-.orbit-spin-rev { animation: orbit-rotate-rev 46s linear infinite; transform-origin: 50% 50%; }
-
-@keyframes orbit-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@keyframes orbit-rotate-rev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-
-.orbit-pin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  color: var(--orange);
-}
 
 .hero {
   position: relative;
@@ -193,16 +157,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 
-.hero-glow {
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(226,103,43,0.24) 0%, rgba(226,103,43,0) 70%);
-  pointer-events: none;
-}
+
 
 .hero-orbit-wrap {
   position: relative;
@@ -219,14 +174,6 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
   color: var(--cream);
   margin: 0 0 16px;
-}
-
-.hero p {
-  font-family: var(--font-body);
-  font-size: 16px;
-  color: rgba(244,239,224,0.75);
-  max-width: 100%;
-  margin: 0 auto 28px;
 }
 
 .btn, button {
@@ -274,7 +221,7 @@ button[formaction*="cancel_order"]:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: var(--cream-2);
-  color: var(--ink);
+  color: var(--ink);  
 }
 
 .split-copy {
@@ -484,6 +431,11 @@ button[formaction*="cancel_order"]:hover {
   border-color: var(--orange);
   color: var(--orange);
   background: transparent;
+}
+.pizza-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 .order-maker {

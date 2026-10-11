@@ -2,64 +2,62 @@
     "Margherita": {
         "price": 18.78,
         "dough": 12,
-        "base": "red"
-        
+        "base": "red tomato"
     },
     "Marinera": {
         "price": 16.56,
         "dough": 12,
-        "base": "red"
+        "base": "red tomato"
     },
     "Capricciosa": {
         "price": 17.59,
-        "dough": 12,
-        "base": "red"
+        "dough": 11,
+        "base": "red",
+        "image": "Capricciosa.png"
     },
     "Diavola": {
         "price": 15.99,
         "dough": 12,
-        "base":"red"
+        "base": "red"
     },
     "Quattro Stagioni": {
         "price": 16.34,
         "dough": 12,
         "base": "Orange"
-
     },
     "Boscaiola": {
         "price": 16.78,
-        "dough": 12,
-        "base" : "Creamy Beige"
+        "dough": 8,
+        "base": "Creamy Beige"
     },
     "Quattro Formaggi": {
         "price": 17.23,
         "dough": 12,
-        "base" : "Creamy Cheese"
+        "base": "Creamy Cheese"
     },
     "Vegetariano": {
         "price": 15.54,
         "dough": 12,
-        "base" : "Vegan Cheese"
+        "base": "Vegan Cheese"
     },
     "Bianca Agilo": {
         "price": 17.34,
-        "dough": 12,
-        "base" : "Creamy Light"
+        "dough": 11,
+        "base": "Creamy Light"
     },
-    "Prosciutto e Funghi ": {
+    "Prosciutto Funghi ": {
         "price": 15.64,
         "dough": 12,
         "base": "tomato sauce with mozzarella"
     },
     "Pugliese": {
         "price": 17.32,
-        "dough": 12,
+        "dough": 0,
         "base": "Yellow texture w Olive oil"
     },
     "Salsicca": {
-        "price": 17.20,
-        "dough": 12,
-        "base": "golden texture w yeloow tan "
+        "price": 17.2,
+        "dough": 2,
+        "base": "golden texture w yellow tan "
     }
-
 }

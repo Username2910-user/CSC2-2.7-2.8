@@ -12,6 +12,7 @@
  <div class="pizza-grid">
     {% for pizza, details in pizzas.items() %}
     <div class="pizza-card">
+      <img src="{{ url_for('static', filename='images/' ~ details['image']) }}" alt="{{ pizza }}">
       <span class="price-tag">${{ details['price'] }}</span>
       <h3>{{ pizza }}</h3>
       <span class="dough-note {% if details['dough'] <= 3 %}low{% endif %}">
@@ -88,11 +89,10 @@
      {% endfor %}
    </ul>
    {% endif %}
-
     <div class="summary-row"><span>Pizza Subtotal</span><span>${{ '%.2f'|format(pizza_subtotal) }}</span></div>
     <div class="summary-row"><span>Add-on Subtotal</span><span>${{ '%.2f'|format(addon_subtotal) }}</span></div>
     {% if discount_applied %}
-    <div class="summary-row discount"><span>Discount (10%)</span><span>-${{ '%.2f'|format(discount) }}</span></div>
+    <div class="summary-row discount"><span>Discount (25%)</span><span>-${{ '%.2f'|format(discount) }}</span></div>
     {% endif %}
     <div class="summary-row total"><span>Total</span><span>${{ '%.2f'|format(total) }}</span></div>
 
