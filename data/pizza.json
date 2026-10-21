@@ -2,12 +2,14 @@
     "Margherita": {
         "price": 18.78,
         "dough": 12,
-        "base": "red tomato"
+        "base": "red tomato",
+        "image": "Margherita.png"
     },
     "Marinera": {
         "price": 16.56,
         "dough": 12,
-        "base": "red tomato"
+        "base": "red tomato",
+        "image": "Marinera.png"
     },
     "Capricciosa": {
         "price": 17.59,
@@ -15,49 +17,58 @@
         "base": "red",
         "image": "Capricciosa.png"
     },
-    "Diavola": {
+    "Diavola ": {
         "price": 15.99,
-        "dough": 12,
-        "base": "red"
+        "dough": 9,
+        "base": "red",
+        "image": "Diavola.png"
     },
     "Quattro Stagioni": {
         "price": 16.34,
         "dough": 12,
-        "base": "Orange"
+        "base": "Orange",
+        "image": "Quattro Stagioni.png"
     },
     "Boscaiola": {
         "price": 16.78,
         "dough": 8,
-        "base": "Creamy Beige"
+        "base": "Creamy Beige",
+        "image": "Boscaiola.png"
     },
     "Quattro Formaggi": {
         "price": 17.23,
         "dough": 12,
-        "base": "Creamy Cheese"
+        "base": "Creamy Cheese",
+        "image": "Quattro Formaggi.png"
     },
     "Vegetariano": {
         "price": 15.54,
         "dough": 12,
-        "base": "Vegan Cheese"
+        "base": "Vegan Cheese",
+        "image": "Vegetariano.png"
     },
     "Bianca Agilo": {
         "price": 17.34,
         "dough": 11,
-        "base": "Creamy Light"
+        "base": "Creamy Light",
+        "image": "Bianca-Agilo.png"
     },
     "Prosciutto Funghi ": {
         "price": 15.64,
-        "dough": 12,
-        "base": "tomato sauce with mozzarella"
+        "dough": 11,
+        "base": "tomato sauce with mozzarella",
+        "image": "Prosciutto Funghi.png"
     },
     "Pugliese": {
         "price": 17.32,
-        "dough": 0,
-        "base": "Yellow texture w Olive oil"
+        "dough": 4,
+        "base": "Yellow texture w Olive oil",
+        "image": "Pugliese.png"
     },
-    "Salsicca": {
+    "Salsiccia": {
         "price": 17.2,
-        "dough": 2,
-        "base": "golden texture w yellow tan "
+        "dough": 4,
+        "base": "golden texture w yellow tan ",
+        "image": "Salsiccia.png"
     }
 }

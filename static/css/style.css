@@ -531,6 +531,8 @@ select option { background: var(--bg-dark); }
 
 .cart-section h2 { margin-top: 0; }
 
+.order-maker .cart-heading { margin-top: 28px; }
+
 .cart-line-list {
   list-style: none;
   margin: 0 0 20px;
@@ -714,3 +716,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline-offset: 2px;
 }
 
+.about-img { width: 50%;
+  height: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-card {
+  position: relative;
+  aspect-ratio: 4/3;
+  margin: 0
+}
+.about-img-2 { width: 50%;
+  height: 50%;
+  object-fit: cover;
+  display: block;
+}
