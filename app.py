@@ -9,6 +9,8 @@ app = Flask(__name__)
 
 app.secret_key = "pizzaria_pizza"
 
+# def statement for the initialization of database structure and tables.
+
 def initialise_database():
   with sqlite3.connect('pizzaria.db') as conn:
     cursor = conn.cursor()
@@ -25,6 +27,8 @@ def initialise_database():
     ''')
     conn.commit()
 
+# app routes for misc files (if needed)
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -37,34 +41,51 @@ def about():
 
 @app.route("/menu")
 def menu():
+    # It loads available items and addons from the database
     pizzas, addons = load_data()
+
+    # Showing current items and addons from the user webpage session
     cart = session.get("cart", {})
     selected_addons = session.get("selected_addons", {})
+
+    # Calculate the overall items total/subtotal, and discounts
     total, pizza_subtotal, addon_subtotal, discount, discount_applied = calculate_total(cart, selected_addons)
+
+    #  Render the menu template to show data to view
     return render_template("menu.html",pizzas=pizzas, addons=addons, cart=cart, total=total,
                            selected_addons=selected_addons, pizza_subtotal=pizza_subtotal,
                            addon_subtotal=addon_subtotal, discount=discount, discount_applied=discount_applied,)
         
 def calculate_total(cart, selected_addons):
+    
+    # Totaling up the prices for both items and addons
     pizza_subtotal = sum(item["price"] * item["quantity"] for item in cart.values())
     addon_subtotal = sum(selected_addons.values())
-
+    
     discount = 0
     discount_applied = False
-    if pizza_subtotal >= 60:
-        discount = pizza_subtotal * 0.10
+
+    # Added a 25% discount if the total of the items accumulate upto $45
+    if pizza_subtotal >= 45:
+        discount = pizza_subtotal * 0.25
         discount_applied = True
 
+    # Calculation of the total of items 
     total = addon_subtotal + pizza_subtotal - discount
     return total, pizza_subtotal, addon_subtotal, discount, discount_applied
+
 def load_data():
     try:
+        # Showing available items and addons for any changes in the inventory or an addition of a new item/addon
         with open('data/pizza.json') as file:
             pizzas = json.load(file)
         with open('data/addons.json') as file:
             addons = json.load(file)
+
         return pizzas, addons
     except (FileNotFoundError, json.JSONDecodeError) as e:
+        
+        # Notifaction if a json item or file is broekn or missing
         print(f"Error loading data: {e}")
         flash("Unable to load pizza data.")
         return {}, {}
