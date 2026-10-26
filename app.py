@@ -84,7 +84,7 @@ def load_data():
 
         return pizzas, addons
     except (FileNotFoundError, json.JSONDecodeError) as e:
-        
+
         # Notifaction if a json item or file is broekn or missing
         print(f"Error loading data: {e}")
         flash("Unable to load pizza data.")
@@ -98,6 +98,7 @@ def add_to_cart():
     pizzas, addons = load_data()
     cart = session.get("cart", {})
 
+    # Ensuring the requested item exists inside the database
     if pizza not in pizzas:
         flash("Selected pizza is invalid.")
         return redirect(url_for("menu"))
@@ -105,19 +106,23 @@ def add_to_cart():
     available_dough = pizzas[pizza].get('dough', 0)
     current_quantity = cart[pizza].get('quantity', 0) if pizza in cart else 0
 
+    # Ensuring there is an available amounts of the item 
     if available_dough <= 0:
         flash(f"Sorry, {pizza} is out of dough.")
         return redirect(url_for("menu"))
-
+    
+    # Prevents the User from  ordering more than the remaining amounts of the item that remains 
     if current_quantity + quantity > available_dough:
         flash(f"Sorry, you can only order {available_dough - current_quantity} more of {pizza}.")
         return redirect(url_for("menu"))
-
+    
+    # Containing Cart contents
     if pizza in cart:
         cart[pizza]["quantity"] += quantity
     else:
         cart[pizza] = {"price": pizzas[pizza]["price"], "quantity": quantity}
 
+    # Saving updated cart into the user interface
     session["cart"] = cart
     session.modified = True
     flash(f"{quantity} {pizza}(s) added to cart.")
@@ -145,6 +150,7 @@ def select_addon():
     selected_keys = request.form.getlist("addons")
     selected_addons = {}
 
+    # Selected addons and theri appropriate prices
     for addon in selected_keys:
         if addon in addons:
             selected_addons[addon] = float(addons[addon]["price"])
@@ -166,6 +172,8 @@ def cancel_order():
 
 @app.route("/checkout", methods=["POST"])
 def checkout():
+
+    # Validation of the users unput regarding the customer name 
     customer_name = request.form["customer_name"].strip().title()
     if not customer_name:
         flash("Customer name is required.")
@@ -174,17 +182,17 @@ def checkout():
     cart = session.get("cart", {})
     selected_addons = session.get("selected_addons", {})
 
+    # Block chechout if or when the cart is empty 
     if not cart:
         flash("Your cart is empty.")
         return redirect(url_for("menu"))
     
-    # Calculate totals and generate invoice number
-
+    # Calculating totals and generate invoice number
     total, pizza_subtotal, addon_subtotal, discount, discount_applied = calculate_total(cart, selected_addons)
     invoice_date = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
     invoice_number = f"INV_{customer_name.replace(' ', '_')}_{invoice_date}"
 
-    # Save order to database pizzaria
+    # Save order details to database pizzaria
     with sqlite3.connect ('pizzaria.db') as conn:
      cursor = conn.cursor()
      cursor.execute('''
@@ -193,15 +201,19 @@ def checkout():
     ''', (invoice_number, customer_name, json.dumps(cart),  json.dumps(selected_addons), total))
     conn.commit()
 
+    # The removal of quantity of item from the inventory stored at .json
     with open('data/pizza.json', "r") as file:
         pizza_data = json.load(file)
 
     for pizza_name, details in cart.items():
         if pizza_name in pizza_data:
             pizza_data[pizza_name]["dough"] -= details["quantity"]
+
+            # Set to never let inventory turn = 0
             if pizza_data[pizza_name]["dough"] < 0:
                 pizza_data[pizza_name]["dough"] = 0
 
+    # Saved the stock back to the inventory pizza.json file 
     try:
         with open('data/pizza.json', "w") as file:
             json.dump(pizza_data, file, indent=4)
@@ -211,6 +223,7 @@ def checkout():
         flash("Could not update dough file.")
 
     # Invoice file 
+    # This Generates a .txt file invoice receipt that is created once a user checked-out which makes the items,addons, etc.
 
     invoice_filename = f"{invoice_number}.txt"
 
