@@ -2,6 +2,7 @@
 {% block title %}Menu - Neapolina Pizzaria{% endblock %}
 {% block content %}
 
+<!-- Guide for user navigation throughout the webpage -->
 <section class="menu-hero">
   <div class="container">
     <h1 class="menu-title">The Menu</h1>
@@ -9,15 +10,20 @@
   </div>
 </section>
 
+<!-- Grid for the layout and structure of the items -->
  <div class="pizza-grid">
     {% for pizza, details in pizzas.items() %}
+    <!--Card has both all the items images which it refers from my .json tag and also from my images folder, and a unique price tag for each item  -->
     <div class="pizza-card">
       <img src="{{ url_for('static', filename='images/' ~ details['image']) }}" alt="{{ pizza }}">
       <span class="price-tag">${{ details['price'] }}</span>
       <h3>{{ pizza }}</h3>
+      <!-- Amount of doughs availiable is shown by the user  -->
       <span class="dough-note {% if details['dough'] <= 3 %}low{% endif %}">
         {% if details['dough'] > 0 %}{{ details['dough'] }} in dough{% else %}Out of dough{% endif %}
       </span>
+
+      <!-- Button for item selection by the user which redirects straight to cart -->
       <button type="button" class="select-pizza-btn"
               onclick="document.getElementById('pizza').value='{{ pizza }}'; document.getElementById('order-maker').scrollIntoView({behavior:'smooth'});">
         Select
@@ -31,10 +37,13 @@
 
  <div class="order-maker" id="order-maker">
 
-  <h2>Make Your Pizza</h2>
+  
 
+  <h2>Make Your Pizza</h2>
+ <!-- Add to cart function  -->
  <form action="{{ url_for('add_to_cart')}}" method="post">
      <fieldset> 
+        <!-- Item selection and price and dough visualisation -->
        <legend>Select Pizza</legend>
          <div class="form-row">
           <select name="pizza" id="pizza">
@@ -43,30 +52,36 @@
             {% endfor %}
           </select>
           <input type="number" name="quantity" id="quantity" value="1" min="1">
+          <!-- button for the add an item to cart  -->
           <button type="submit">Add to Cart</button>
         </div>
       </fieldset> 
  </form>
-
+  <!-- Addon selection  -->
  <form action="{{ url_for('select_addon') }}" method="post">
   <fieldset>
         <legend>Add-ons</legend>
         <div class="addon-toggles">
           {% for addon, data in addons.items() %}
+
+          <!-- Dynamic checkbox to show availablity of addons -->
           <label>
             <input type="checkbox" name="addons" id="{{ addon }}" value="{{ addon }}" {% if addon in selected_addons %}checked{% endif %}>
             <span class="addon-chip">{{ addon }} &middot; ${{ data.price }}</span>
           </label>
           {% endfor %}
         </div>
+         <!-- Button for adding of addons. This also include the deselection of addons after the user deselects the said addon and  press the update button again.-->
         <div class="form-row" style="margin-top:16px;">
           <button type="submit">Update Add-ons</button>
         </div>
       </fieldset>
  </form>
 
+   <!--Cart-->
  <h2 class="cart-heading">Your Cart</h2>
  
+   <!--This form visualise the details regarding the total, quantity, price of chosen item, and remove any items inside of the cart-->
  <form method="post">
    {% if cart %}
    <ul class="cart-line-list">
@@ -81,7 +96,8 @@
    {% else %}
    <p class="empty-state">Your cart is empty.</p>
    {% endif %}
-
+   
+     <!--This is where the addons list based out of the  availble from addon.json file are shown-->
    {% if selected_addons %}
    <ul class="addon-line-list">
      {% for item, price in selected_addons.items() %}
@@ -89,17 +105,21 @@
      {% endfor %}
    </ul>
    {% endif %}
+     <!--This row will illustrate the subtotals for all items, addons, discounts added, and the grand total -->
     <div class="summary-row"><span>Pizza Subtotal</span><span>${{ '%.2f'|format(pizza_subtotal) }}</span></div>
     <div class="summary-row"><span>Add-on Subtotal</span><span>${{ '%.2f'|format(addon_subtotal) }}</span></div>
     {% if discount_applied %}
     <div class="summary-row discount"><span>Discount (25%)</span><span>-${{ '%.2f'|format(discount) }}</span></div>
     {% endif %}
     <div class="summary-row total"><span>Total</span><span>${{ '%.2f'|format(total) }}</span></div>
-
+    
+      <!--This row is situated in the bottom part of the page. This requires the user to fill his or her name for order confirmaton. -->
    <div class="checkout-row">
      <label for="customer_name_checkout">Your Name</label>
      <input type="text" name="customer_name" id="customer_name_checkout" required>
      <button type="submit" formaction="{{ url_for('checkout') }}">Checkout</button>
+
+       <!--this button allows the user to cancel the the order as in its entirity.-->
      <button type="submit" formaction="{{ url_for('cancel_order') }}"
       onclick="return confirm('Are you sure you want to cancel your order?')">Cancel Order</button>
    </div>

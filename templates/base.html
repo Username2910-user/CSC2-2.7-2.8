@@ -7,21 +7,24 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-
+   <!--Navigation Bar for the Webpage -->
   <nav class="nav">
     <div class="nav-inner">
       <a href="{{ url_for('index') }}" class="brand" aria-label="Neapolina Pizzaria home">
         <span>NEAPOLINA<br>PIZZARIA</span>
       </a>
+      <!--Navigation links for accessibility for all the pages-->
       <ul class="nav-links">
         <li><a href="{{ url_for('index') }}">Home</a></li>
         <li><a href="{{ url_for('about') }}">About</a></li>
         <li><a href="{{ url_for('menu') }}">Menu</a></li>
         <li><a href="{{ url_for('order_history') }}">Order History</a></li>
       </ul>
+      <a>shopping cart</a>
     </div>
   </nav>
-
+   
+  <!--Flash message that notfies the user-->
   {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class="flashes">
@@ -33,7 +36,7 @@
   <main class="container">
     {% block content %}{% endblock %}
   </main>
-
+  <!--The final footer for the webpage-->
   <footer class="footer">
     <div class="container footer-inner">
       <span>&copy; 2026 Neapolina Pizzaria</span>
