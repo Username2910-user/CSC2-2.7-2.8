@@ -12,6 +12,9 @@ app.secret_key = "pizzaria_pizza"
 # def statement for the initialization of database structure and tables.
 
 def initialise_database():
+  
+  '''SQLite database and checking orders'''
+
   with sqlite3.connect('pizzaria.db') as conn:
     cursor = conn.cursor()
     cursor.execute(''' 
@@ -33,7 +36,9 @@ def initialise_database():
 def index():
     return render_template("index.html")
 
+'''Both routes render their pages '''
 @app.route("/about")
+
 def about():
     return render_template("about_us.html")
 
@@ -57,7 +62,9 @@ def menu():
                            addon_subtotal=addon_subtotal, discount=discount, discount_applied=discount_applied,)
         
 def calculate_total(cart, selected_addons):
-    
+
+    '''Calculate all of the subtotals of discounts, items throughout the user session'''
+
     # Totaling up the prices for both items and addons
     pizza_subtotal = sum(item["price"] * item["quantity"] for item in cart.values())
     addon_subtotal = sum(selected_addons.values())
@@ -75,6 +82,9 @@ def calculate_total(cart, selected_addons):
     return total, pizza_subtotal, addon_subtotal, discount, discount_applied
 
 def load_data():
+
+    '''Loads items and addon options from  pizza and addon JSON files'''
+
     try:
         # Showing available items and addons for any changes in the inventory or an addition of a new item/addon
         with open('data/pizza.json') as file:
@@ -93,6 +103,9 @@ def load_data():
 # Function 2 for the add to cart function
 @app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
+
+    '''Display the menu, active shopping cart, and current totals for all items and menu'''
+
     pizza = request.form.get("pizza")
     quantity = int(request.form.get("quantity", 1))
     pizzas, addons = load_data()
@@ -111,7 +124,7 @@ def add_to_cart():
         flash(f"Sorry, {pizza} is out of dough.")
         return redirect(url_for("menu"))
     
-    # Prevents the User from  ordering more than the remaining amounts of the item that remains 
+    # Prevents the User from  ordering more than the remaining amounts of the item that remained
     if current_quantity + quantity > available_dough:
         flash(f"Sorry, you can only order {available_dough - current_quantity} more of {pizza}.")
         return redirect(url_for("menu"))
@@ -132,6 +145,9 @@ def add_to_cart():
 
 @app.route("/remove_from_cart/<item>")  
 def remove_from_cart(item):
+
+    '''Removes a specific item into the user's session cart'''
+
     cart = session.get("cart", {})
     if item in cart:
         del cart[item]
@@ -146,6 +162,9 @@ def remove_from_cart(item):
 
 @app.route("/select_addon", methods=["POST"])
 def select_addon():
+    
+    '''Validating addons that are chosen currently in session '''
+
     pizzas, addons = load_data()
     selected_keys = request.form.getlist("addons")
     selected_addons = {}
@@ -163,6 +182,10 @@ def select_addon():
 # Function 5  cancel order function
 @app.route("/cancel_order", methods=["POST"])
 def cancel_order():
+
+    '''Purge cart which contains all the variables like items and addons assigned
+     and selected by the user '''
+    
     session.pop("cart", None)
     session.pop("selected_addons", None)
     flash("Order is canceled.")
@@ -173,7 +196,11 @@ def cancel_order():
 @app.route("/checkout", methods=["POST"])
 def checkout():
 
-    # Validation of the users unput regarding the customer name 
+    # Validation of the users input regarding the customer name 
+
+    '''Active session orders, recorded items/addons selected, 
+    removing doughs, and output receipts'''
+
     customer_name = request.form["customer_name"].strip().title()
     if not customer_name:
         flash("Customer name is required.")
@@ -188,6 +215,9 @@ def checkout():
         return redirect(url_for("menu"))
     
     # Calculating totals and generate invoice number
+
+    ''' FOLLOW SUBSEQUENT ORDER ( Total, Item, addon, discount, discount applied ) '''
+
     total, pizza_subtotal, addon_subtotal, discount, discount_applied = calculate_total(cart, selected_addons)
     invoice_date = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
     invoice_number = f"INV_{customer_name.replace(' ', '_')}_{invoice_date}"
@@ -260,7 +290,12 @@ def checkout():
 # Function 7: Order or Order History function
 
 @app.route("/orders")
+
 def order_history():
+
+    '''Retriving all recent transactions done by the user
+      which was logged inside the database '''
+
     with sqlite3.connect('pizzaria.db') as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM orders ORDER BY date DESC")
@@ -284,6 +319,10 @@ def order_history():
 
 @app.route('/cancel_saved_order/<int:order_id>', methods=['POST'])
 def cancel_saved_order(order_id):
+    
+    '''This will allow the ability to cancel a saved order after the transaction from the checkout.
+    Although multiple factors that can result to a cancellation, this serves as a fail safe'''
+
     with sqlite3.connect('pizzaria.db') as conn:
         cursor = conn.cursor()
         cursor.execute("DELETE FROM orders WHERE order_id = ?",(order_id,))
